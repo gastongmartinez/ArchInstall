@@ -65,6 +65,12 @@ gnome () {
     # Aplicaciones favoritas
     dconf write /org/gnome/shell/favorite-apps "['org.gnome.Nautilus.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Boxes.desktop', 'org.gnome. Evolution.desktop', 'libreoffice-calc.desktop', 'chromium.desktop', 'firefox.desktop', 'brave-browser.desktop', 'org.qbittorrent.qBittorrent.    desktop', 'code-oss.desktop', 'codeblocks.desktop', 'Alacritty.desktop', 'clementine.desktop', 'vlc.desktop', 'org.gnome.tweaks.desktop']"
 
+    # Suspender
+    # En 2 horas enchufado
+    dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout 7200
+    # En 30 minutos con bateria
+    dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout 1800
+
     # Autostart Apps
     #if [ ! -d ~/.config/autostart ]; then
     #    mkdir -p ~/.config/autostart
