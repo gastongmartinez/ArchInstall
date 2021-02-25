@@ -27,22 +27,90 @@ sddm () {
 }    
 ##################################################################################
 
-################################ Tema GTK ########################################
+################################ Temas GTK #######################################
+prof_gnome () {
+    su - $USUARIO <<EOF
+        paru -S prof-gnome-theme-git --noconfirm
+EOF
+}
+
+qogir () {
+    su - $USUARIO <<EOF
+    paru -S qogir-icon-theme --noconfirm
+    paru -S qogir-gtk-theme  --noconfirm
+EOF
+}
+
+whitesur () {
+    su - $USUARIO <<EOF
+        paru -S whitesur-gtk-theme-git whitesur-icon-theme-git --noconfirm
+        paru -S whitesur-cursor-theme-git --noconfirm
+EOF
+}
+
+flat_remix () {
+        su - $USUARIO <<EOF
+            paru -S flat-remix flat-remix-gtk flat-remix-gnome --noconfirm
+EOF
+}
+
+orchis () {
+        su - $USUARIO <<EOF
+            paru -S orchis-theme-git --noconfirm
+EOF
+}
+    
+nordic () {
+        su - $USUARIO <<EOF
+            paru -S nordic-theme --noconfirm
+EOF
+}
+
+
 temas_gtk () {
     read -p "Desea instalar temas GTK (S/N): " TGTK
     if [ "${TGTK}" == "S" ];
     then
-        su - $USUARIO <<EOF
-        # Temas
-        paru -S prof-gnome-theme-git --noconfirm
-        paru -S qogir-icon-theme --noconfirm
-        #paru -S qogir-gtk-theme  --noconfirm
-        #paru -S whitesur-gtk-theme-git whitesur-icon-theme-git --noconfirm
-        #paru -S whitesur-cursor-theme-git --noconfirm
-        #paru -S flat-remix flat-remix-gtk flat-remix-gnome --noconfirm
-        #paru -S orchis-theme-git --noconfirm
-        #paru -S nordic-theme --noconfirm
-EOF
+        TEMAS="Prof-Gnome Qogir WhiteSur Flat-Remix Orchis Nordic Salir"
+        echo -e "\nSeleccione el tema a instalar:"
+        select tema in $TEMAS;
+        do
+            if [ $tema == "Prof-Gnome" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                prof_gnome
+            elif [ $tema == "Qogir" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                qogir
+            elif [ $tema == "WhiteSur" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                whitesur
+            elif [ $tema == "Flat-Remix" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                flat_remix
+            elif [ $tema == "Orchis" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                orchis
+            elif [ $tema == "Nordic" ];
+            then
+                echo -e "\nInstalando $tema"
+                sleep 2
+                nordic
+            else
+                break
+            fi
+            echo -e "\nSeleccione el tema a instalar:"
+            REPLY=""
+        done    
     fi
 }    
 ##################################################################################
@@ -214,7 +282,6 @@ menu () {
             sleep 2
             kde
         else
-            echo "Salir"
             break
         fi
         echo -e "\nSeleccione el escritorio a instalar:"
@@ -258,7 +325,6 @@ menu () {
                 sleep 2
                 qtile
             else
-                echo "Salir"
                 break
             fi
             echo -e "\nSeleccione el window manager a instalar:"
