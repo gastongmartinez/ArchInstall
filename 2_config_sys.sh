@@ -74,8 +74,7 @@ then
     then
         # VirtualBox Guest utils
         pacman -S virtualbox-guest-utils --noconfirm
-    elif [ "${PLAT}" -eq 1 ] 2>/dev/null;
-    then
+    else
         # Open-VM-Tools (WMWare)
         pacman -S open-vm-tools --noconfirm
         pacman -S xf86-video-vmware --noconfirm
