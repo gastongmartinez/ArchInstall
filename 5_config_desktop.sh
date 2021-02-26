@@ -143,6 +143,60 @@ mate () {
     fi
 }
 
+xfce () {
+    # Tema
+    xfconf-query -c xsettings -p /Net/ThemeName -s Prof-Gnome-Dark
+    xfconf-query -c xsettings -p /Net/IconThemeName -s Qogir-manjaro-dark
+    xfconf-query -c xfwm4 -p /general/theme -s Qogir-manjaro-dark
+
+    # Fuentes
+    xfconf-query -c xsettings -p /Gtk/FontName -s 'Ubuntu 10'
+    xfconf-query -c xsettings -p /Gtk/MonospaceFontName -s 'Ubuntu Mono 10'
+    xfconf-query -c xfwm4 -p /general/title_font -s 'Ubuntu Bold 11'
+
+    # Ocultar iconos del escritorio
+    xfconf-query -c xfce4-desktop -n -p /desktop-icons/style -t int -s 0
+
+    # Thunar
+    xfconf-query -c thunar -n -p /last-show-hidden -t bool -s true                      # Mostrar archivos ocultos
+    xfconf-query -c thunar -n -p /default-view -t string -s 'ThunarDetailsView'         # Vista por defecto detalles
+    xfconf-query -c thunar -n -p /last-sort-column -t string -s 'THUNAR_COLUMN_TYPE'    # Ordenar por tipo
+    xfconf-query -c thunar -n -p /last-sort-order -t string -s 'GTK_SORT_ASCENDING'     # Orden ascendente
+    xfconf-query -c thunar -n -p /misc-folders-first -t bool -s true                    # Mostrar carpetas primero
+    xfconf-query -c thunar -n -p /last-details-view-column-order -t string -s "THUNAR_COLUMN_NAME,THUNAR_COLUMN_TYPE,THUNAR_COLUMN_SIZE,THUNAR_COLUMN_DATE_MODIFIED"                                                        # Orden de las columnas
+
+    # Eliminar panel inferior (se aplica al reiniciar)
+    xfconf-query -c xfce4-panel -p /panels/panel-2 -r -R
+    xfconf-query -c xfce4-panel -p /panels -a -t int -s 1
+
+    # Panel superior (se aplica al reiniciar)
+    xfconf-query -c xfce4-panel -p /panels/panel-1/size -s 28                                       # Establece altura
+    PAGER=`xfconf-query -c xfce4-panel -p /plugins -l -v | grep pager | cut -d " " -f1`             # Determina que pluguin es el PAGER 
+    APP=`xfconf-query -c xfce4-panel -p /plugins -l -v | grep applicationsmenu | cut -d " " -f1`    # Determina que pluguin es el 
+    xfconf-query -c xfce4-panel -p $PAGER -r -R                                                     # Elimina PAGER
+    xfconf-query -c xfce4-panel -p $APP -r -R                                                       # Elimina Menu    
+    xfconf-query -c xfce4-panel -n -p /plugins/plugin-30 -t string -s whiskermenu                   # Crea el plugin 30 como whiskermenu
+    ACTUAL=`xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids -v | cut -f2 -d":"`           # Recupera los plugins visibles
+    ACTUALARR=($ACTUAL)                                                                             # Convierte los plugins en un array
+    NUEVO="xfconf-query -c xfce4-panel -n -p /panels/panel-1/plugin-ids -a -t int -s 30"            # Comando base para agregar whiskermenu
+    for i in "${ACTUALARR[@]}"                                                                      # Recorre el array agregando los elementos
+    do                                                                                              # existentes en el comando nuevo
+        NUEVO+=" -t int -s $i"
+    done
+    bash -c "$NUEVO"                                                                                # Ejecuta el comando
+  
+    # Autostart
+    if [ ! -d ~/.config/autostart ]; 
+    then
+        mkdir -p ~/.config/autostart
+    fi
+    PLANK=/usr/share/applications/plank.desktop
+    if [ -f "$PLANK" ]; 
+    then 
+        cp "$PLANK" ~/.config/autostart/
+    fi    
+}
+
 doom () {
     cd ~
     if [ -d ~/.emacs.d ]; 
@@ -153,7 +207,7 @@ doom () {
     ~/.emacs.d/bin/doom install
 }
 
-CONFIGURAR="GNOME Mate DoomEmacs Salir"
+CONFIGURAR="GNOME Mate XFCE DoomEmacs Salir"
 echo -e "\nElija que configurar:"
 select conf in $CONFIGURAR;
 do
@@ -167,6 +221,11 @@ do
         echo -e "\nConfigurando $conf"
         sleep 2
         mate
+    elif [ $conf == "XFCE" ];
+    then
+        echo -e "\nConfigurando $conf"
+        sleep 2
+        xfce
     elif [ $conf == "DoomEmacs" ];
     then
         echo -e "\nConfigurando $conf"
