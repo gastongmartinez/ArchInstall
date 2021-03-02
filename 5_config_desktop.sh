@@ -39,14 +39,21 @@ gnome () {
     dconf write /org/gnome/shell/extensions/dash-to-dock/min-alpha 0.10
     dconf write /org/gnome/shell/extensions/dash-to-dock/max-alpha 0.60
     # Pamac
-    dconf write /org/gnome/shell/enabled-extensions "['arcmenu@arcmenu.com', 'pop-shell@system76.com', 'user-theme@gnome-shell-extensions.gcampax.  github.com', 'drop-down-terminal@gs-extensions.zzrough.org', 'dash-to-dock@micxgx.gmail.com', 'pamac-updates@manjaro.org']"
+    dconf write /org/gnome/shell/enabled-extensions "['arcmenu@arcmenu.com', 'pop-shell@system76.com', 'user-theme@gnome-shell-extensions.gcampax.  github.com', 'dash-to-dock@micxgx.gmail.com', 'pamac-updates@manjaro.org']"
     # Drop down Terminal
-    dconf write /org/gnome/shell/enabled-extensions "['arcmenu@arcmenu.com', 'pop-shell@system76.com', 'user-theme@gnome-shell-extensions.gcampax.  github.com', 'dash-to-dock@micxgx.gmail.com', 'pamac-updates@manjaro.org', 'drop-down-terminal@gs-extensions.zzrough.org',    'drop-down-terminal-x@bigbn.pro']"
+    dconf write /org/gnome/shell/enabled-extensions "['arcmenu@arcmenu.com', 'pop-shell@system76.com', 'user-theme@gnome-shell-extensions.gcampax.  github.com', 'dash-to-dock@micxgx.gmail.com', 'pamac-updates@manjaro.org', 'drop-down-terminal-x@bigbn.pro']"
     dconf write /pro/bigbn/drop-down-terminal-x/other-shortcut "['F12']"
     dconf write /pro/bigbn/drop-down-terminal-x/enable-tabs true
     dconf write /pro/bigbn/drop-down-terminal-x/use-default-colors true
     ##############################################################################################################################################
 
+    # Teclado
+    dconf write /org/gnome/desktop/input-sources/sources "[('xkb', 'es+winkeys')]"
+
+    # Ventanas
+    dconf write /org/gnome/desktop/wm/preferences/button-layout "'appmenu:minimize,maximize,close'"
+    dconf write /org/gnome/mutter/center-new-windows true
+    
     # Tema
     dconf write /org/gnome/desktop/interface/gtk-theme "'Prof-Gnome-Dark'"
     dconf write /org/gnome/shell/extensions/user-theme/name "'Prof-Gnome-Dark'"
