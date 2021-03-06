@@ -34,7 +34,9 @@ PACMANPKGS=(
     'bash-completion'
     'fish'
     'zsh'
-    'zsh-completions'
+    #'zsh-completions'
+    'zsh-autosuggestions'
+    'zsh-syntax-highlighting'
     'dialog'
 
     #### Terminales ####
