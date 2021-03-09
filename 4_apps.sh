@@ -15,6 +15,8 @@ PACMANPKGS=(
 
     #### Fuentes ####
     'terminus-font'
+    'ttf-roboto'
+    'ttf-roboto-mono'
     'ttf-dejavu'
     'powerline-fonts'
     'ttf-ubuntu-font-family'
