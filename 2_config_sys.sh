@@ -16,11 +16,11 @@ pacman -Syu
 # Usuario
 pacman -S xdg-user-dirs xdg-utils --noconfirm
 echo -e "\nCreacion de usuario (sera incluido en el grupo wheel).\n"
-read -p "Ingrese el nombre del usuario: " USUARIO
-read -p "Ingrese el nombre completo del usuario: " NOMBRE
-useradd -m -g users -G wheel -s /bin/bash -c "$NOMBRE" $USUARIO
+read -rp "Ingrese el nombre del usuario: " USUARIO
+read -rp "Ingrese el nombre completo del usuario: " NOMBRE
+useradd -m -g users -G wheel -s /bin/bash -c "$NOMBRE" "$USUARIO"
 echo -e "\nIngresar password para el usuario $USUARIO\n"
-passwd $USUARIO
+passwd "$USUARIO"
 
 # Swappiness
 echo -e "vm.swappiness=10\n" >> /etc/sysctl.d/99-sysctl.conf
@@ -28,14 +28,14 @@ echo -e "vm.swappiness=10\n" >> /etc/sysctl.d/99-sysctl.conf
 #######################  Hardware & Drivers  #######################
 echo -e "\nSeleccion de paquetes para el hardware del equipo.\n"
 # Wifi
-read -p "Desea instalar WPA Supplicant (S/N): " WIFI
+read -rp "Desea instalar WPA Supplicant (S/N): " WIFI
 if [ "${WIFI}" == "S" ];
 then
     pacman -S wpa_supplicant --noconfirm
 fi
 
 # Bluetooth
-read -p "Desea instalar Bluetooth (S/N): " BT
+read -rp "Desea instalar Bluetooth (S/N): " BT
 if [ "${BT}" == "S" ];
 then
     pacman -S bluez --noconfirm
@@ -44,7 +44,7 @@ then
 fi
 
 # SSD
-read -p "Se instala en un SSD (S/N): " SSD
+read -rp "Se instala en un SSD (S/N): " SSD
 if [ "${SSD}" == "S" ];
 then
     pacman -S util-linux --noconfirm
@@ -54,7 +54,7 @@ fi
 
 # Microcode
 
-read -p "Instalar microcode I=Intel - A=AMD: " MC
+read -rp "Instalar microcode I=Intel - A=AMD: " MC
 if [ "${MC}" == "A" ];
 then
     pacman -S amd-ucode --noconfirm
@@ -66,10 +66,10 @@ fi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Hardware
-read -p "Se instala en maquina virtual (S/N): " MV
+read -rp "Se instala en maquina virtual (S/N): " MV
 if [ "${MV}" == "S" ];
 then
-    read -p "Indicar plataforma virtual 1=VirtualBox - 2=VMWare: " PLAT
+    read -rp "Indicar plataforma virtual 1=VirtualBox - 2=VMWare: " PLAT
     if [ "${PLAT}" -eq 1 ] 2>/dev/null;
     then
         # VirtualBox Guest utils
@@ -89,26 +89,26 @@ pacman -S pulseaudio --noconfirm
 pacman -S pulseaudio-bluetooth --noconfirm
 
 # Video
-read -p "Instalar drivers de Video AMD (S/N): " VAMD
+read -rp "Instalar drivers de Video AMD (S/N): " VAMD
 if [ "${VAMD}" == "S" ];
 then
     pacman -S xf86-video-amdgpu --noconfirm
 fi
-read -p "Instalar drivers de Video Intel (S/N): " VINT
+read -rp "Instalar drivers de Video Intel (S/N): " VINT
 if [ "${VINT}" == "S" ];
 then
     pacman -S xf86-video-intel --noconfirm
 fi
 
 # Touchpad
-read -p "Instalar drivers para touchpad (S/N): " TOUCH
+read -rp "Instalar drivers para touchpad (S/N): " TOUCH
 if [ "${TOUCH}" == "S" ];
 then
     pacman -S xf86-input-libinput --noconfirm
 fi
 
 # PowerManagement
-read -p "Instalar PowerMangement (S/N): " PM
+read -rp "Instalar PowerMangement (S/N): " PM
 if [ "${PM}" == "S" ];
 then
     pacman -S tlp --noconfirm 
@@ -117,7 +117,7 @@ then
 fi
 
 # ACPI 
-read -p "Instalar ACPI (S/N): " AC
+read -rp "Instalar ACPI (S/N): " AC
 if [ "${AC}" == "S" ];
 then   
     pacman -S acpi --noconfirm 
@@ -133,7 +133,7 @@ pacman -S xterm --noconfirm
 ####################################################################
 
 # PARU
-su - $USUARIO <<EOF
+su - "$USUARIO" <<EOF
     cd /tmp
     git clone https://aur.archlinux.org/paru.git
     cd paru

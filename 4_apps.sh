@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-read -p "Ingrese el nombre del usuario perteneciente al grupo wheel: " USUARIO
+read -rp "Ingrese el nombre del usuario perteneciente al grupo wheel: " USUARIO
 
-read -p "Instalar virtualizacion? (S/N): " VIRT
+read -rp "Instalar virtualizacion? (S/N): " VIRT
 
 ############################### Pacman ################################
 PACMANPKGS=(
@@ -141,13 +141,13 @@ if [ "$VIRT" == 'S' ]; then
 
     # Activacion libvirt para KVM
     systemctl enable libvirtd
-    usermod -G libvirt -a $USUARIO
+    usermod -G libvirt -a "$USUARIO"
 fi
 
 #######################################################################
 
 ################# Instalacion de paquetes desde AUR ###################
-su - $USUARIO <<'EOF'
+su - "$USUARIO" <<EOF
     AURPKGS=(
         'pamac'
         'brave-bin'

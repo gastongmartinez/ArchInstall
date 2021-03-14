@@ -2,14 +2,14 @@
 
 ################################# LIGHTDM ##########################################
 lightdm () {
-    read -p "Desea instalar Lightdm (S/N): " LDM
+    read -rp "Desea instalar Lightdm (S/N): " LDM
     if [ "${LDM}" == "S" ];
     then
         pacman -S lightdm --noconfirm
         pacman -S lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm
 
         ### Slick Greeter ###
-        su - $USUARIO <<EOF
+        su - "$USUARIO" <<EOF
             paru -S lightdm-slick-greeter --noconfirm
             paru -S lightdm-settings --noconfirm
 EOF
@@ -29,78 +29,78 @@ sddm () {
 
 ################################ Temas GTK #######################################
 prof_gnome () {
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
         paru -S prof-gnome-theme-git --noconfirm
 EOF
 }
 
 qogir () {
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
     paru -S qogir-icon-theme --noconfirm
     paru -S qogir-gtk-theme  --noconfirm
 EOF
 }
 
 whitesur () {
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
         paru -S whitesur-gtk-theme-git whitesur-icon-theme-git --noconfirm
         paru -S whitesur-cursor-theme-git --noconfirm
 EOF
 }
 
 flat_remix () {
-        su - $USUARIO <<EOF
+        su - "$USUARIO" <<EOF
             paru -S flat-remix flat-remix-gtk flat-remix-gnome --noconfirm
 EOF
 }
 
 orchis () {
-        su - $USUARIO <<EOF
+        su - "$USUARIO" <<EOF
             paru -S orchis-theme-git --noconfirm
 EOF
 }
     
 nordic () {
-        su - $USUARIO <<EOF
+        su - "$USUARIO" <<EOF
             paru -S nordic-theme --noconfirm
 EOF
 }
 
 
 temas_gtk () {
-    read -p "Desea instalar temas GTK (S/N): " TGTK
+    read -rp "Desea instalar temas GTK (S/N): " TGTK
     if [ "${TGTK}" == "S" ];
     then
         TEMAS="Prof-Gnome Qogir WhiteSur Flat-Remix Orchis Nordic Salir"
         echo -e "\nSeleccione el tema a instalar:"
         select tema in $TEMAS;
         do
-            if [ $tema == "Prof-Gnome" ];
+            if [ "$tema" == "Prof-Gnome" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
                 prof_gnome
-            elif [ $tema == "Qogir" ];
+            elif [ "$tema" == "Qogir" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
                 qogir
-            elif [ $tema == "WhiteSur" ];
+            elif [ "$tema" == "WhiteSur" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
                 whitesur
-            elif [ $tema == "Flat-Remix" ];
+            elif [ "$tema" == "Flat-Remix" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
                 flat_remix
-            elif [ $tema == "Orchis" ];
+            elif [ "$tema" == "Orchis" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
                 orchis
-            elif [ $tema == "Nordic" ];
+            elif [ "$tema" == "Nordic" ];
             then
                 echo -e "\nInstalando $tema"
                 sleep 2
@@ -127,7 +127,7 @@ gnome () {
     temas_gtk
 
     # Extensiones
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
         paru -S gnome-shell-extension-pop-shell --noconfirm
         paru -S gnome-shell-extension-arc-menu --noconfirm
         paru -S gnome-shell-extension-drop-down-terminal-x --noconfirm
@@ -158,7 +158,7 @@ mate () {
     pacman -S mate-applet-dock mate-common plank --noconfirm
     pacman -S mate-icon-theme mate-themes --noconfirm
 
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
     # Mate tools
     paru -S mate-tweak brisk-menu --noconfirm
     paru -S gnome-system-tools --noconfirm
@@ -170,7 +170,7 @@ EOF
 
 ################################### KDE ############################################
 kde () {
-    read -p "Desea instalar SDDM (S/N): " DM
+    read -rp "Desea instalar SDDM (S/N): " DM
     if [ "${DM}" == "S" ];
     then
         sddm
@@ -195,7 +195,7 @@ kde () {
     #pacman -S cantor --noconfirm
     pacman -S latte-dock --noconfirm
 
-    su - $USUARIO <<EOF
+    su - "$USUARIO" <<EOF
         # Temas
         paru -S whitesur-kde-theme-git --noconfirm
         paru -S whitesur-icon-theme-git --noconfirm
@@ -225,7 +225,7 @@ awesomewm () {
 ################################### SpectrWM #######################################
 spectrwm () {
     pacman -S spectrwm --noconfirm
-    su - $USUARIO -c 'paru -S polybar --noconfirm'
+    su - "$USUARIO" -c 'paru -S polybar --noconfirm'
 }
 ####################################################################################
 
@@ -250,7 +250,7 @@ i3 () {
 bspwm () {
     pacman -S bspwm --noconfirm
     pacman -S sxhkd --noconfirm
-    su - $USUARIO -c 'paru -S polybar --noconfirm'
+    su - "$USUARIO" -c 'paru -S polybar --noconfirm'
 }
 ####################################################################################
 
@@ -268,22 +268,22 @@ menu () {
     echo -e "\nSeleccione el escritorio a instalar:"
     select escritorio in $ESCRITORIOS;
     do
-        if [ $escritorio == "GNOME" ];
+        if [ "$escritorio" == "GNOME" ];
         then
             echo -e "\nInstalando $escritorio"
             sleep 2
             gnome
-        elif [ $escritorio == "XFCE" ];
+        elif [ "$escritorio" == "XFCE" ];
         then
             echo -e "\nInstalando $escritorio"
             sleep 2
             xfce
-        elif [ $escritorio == "Mate" ];
+        elif [ "$escritorio" == "Mate" ];
         then
             echo -e "\nInstalando $escritorio"
             sleep 2
             mate
-        elif [ $escritorio == "KDE" ];
+        elif [ "$escritorio" == "KDE" ];
         then
             echo -e "\nInstalando $escritorio"
             sleep 2
@@ -297,7 +297,7 @@ menu () {
     ############################################################
 
     ######################## WM ################################
-    read -p "Desea instalar algun window manager (S/N): " WM
+    read -rp "Desea instalar algun window manager (S/N): " WM
     if [ "${WM}" == "S" ];
     then
         wm_general
@@ -306,32 +306,32 @@ menu () {
         echo -e "\nSeleccione el window manager a instalar:"
         select winm in $WINMS;
         do
-            if [ $winm == "SpectrWM" ];
+            if [ "$winm" == "SpectrWM" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
                 spectrwm
-            elif [ $winm == "Xmonad" ];
+            elif [ "$winm" == "Xmonad" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
                 xmonad
-            elif [ $winm == "I3" ];
+            elif [ "$winm" == "I3" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
                 i3
-            elif [ $winm == "BSPWM" ];
+            elif [ "$winm" == "BSPWM" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
                 bspwm
-            elif [ $winm == "Qtile" ];
+            elif [ "$winm" == "Qtile" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
                 qtile
-            elif [ $winm == "Awesome" ];
+            elif [ "$winm" == "Awesome" ];
             then
                 echo -e "\nInstalando $winm"
                 sleep 2
@@ -350,7 +350,7 @@ menu () {
 
 pacman -Syu
 
-read -p "Ingrese el nombre del usuario perteneciente al grupo wheel: " USUARIO
+read -rp "Ingrese el nombre del usuario perteneciente al grupo wheel: " USUARIO
 
 menu
 

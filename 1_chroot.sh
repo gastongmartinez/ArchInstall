@@ -20,13 +20,15 @@ echo -e "KEYMAP=es" > /etc/vconsole.conf
 
 # Nombre Equipo
 echo -e "\nNombreEquipo.\n"
-read -p "Ingrese el nombre del equipo: " EQUIPO
-read -p "Ingrese el nombre del dominio: " DOMINIO
+read -rp "Ingrese el nombre del equipo: " EQUIPO
+read -rp "Ingrese el nombre del dominio: " DOMINIO
 
 echo -e "${EQUIPO}" > /etc/hostname
-echo -e "127.0.0.1\tlocalhost" >> /etc/hosts
-echo -e "::1\t\tlocalhost" >> /etc/hosts
-echo -e "127.0.1.1\t${EQUIPO}.${DOMINIO}\t${EQUIPO}" >> /etc/hosts
+{
+    echo -e "127.0.0.1\tlocalhost"
+    echo -e "::1\t\tlocalhost"
+    echo -e "127.0.1.1\t${EQUIPO}.${DOMINIO}\t${EQUIPO}"
+} >> /etc/hosts
 
 # Network Manager
 echo -e "\nNetwork Manager.\n"

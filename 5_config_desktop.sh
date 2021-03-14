@@ -178,13 +178,13 @@ xfce () {
 
     # Panel superior (se aplica al reiniciar)
     xfconf-query -c xfce4-panel -p /panels/panel-1/size -s 28                                       # Establece altura
-    PAGER=`xfconf-query -c xfce4-panel -p /plugins -l -v | grep pager | cut -d " " -f1`             # Determina que pluguin es el PAGER 
-    APP=`xfconf-query -c xfce4-panel -p /plugins -l -v | grep applicationsmenu | cut -d " " -f1`    # Determina que pluguin es el 
-    xfconf-query -c xfce4-panel -p $PAGER -r -R                                                     # Elimina PAGER
-    xfconf-query -c xfce4-panel -p $APP -r -R                                                       # Elimina Menu    
+    PAGER=$(xfconf-query -c xfce4-panel -p /plugins -l -v | grep pager | cut -d " " -f1)            # Determina que pluguin es el PAGER 
+    APP=$(xfconf-query -c xfce4-panel -p /plugins -l -v | grep applicationsmenu | cut -d " " -f1)   # Determina que pluguin es el 
+    xfconf-query -c xfce4-panel -p "$PAGER" -r -R                                                   # Elimina PAGER
+    xfconf-query -c xfce4-panel -p "$APP" -r -R                                                     # Elimina Menu    
     xfconf-query -c xfce4-panel -n -p /plugins/plugin-30 -t string -s whiskermenu                   # Crea el plugin 30 como whiskermenu
-    ACTUAL=`xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids -v | cut -f2 -d":"`           # Recupera los plugins visibles
-    ACTUALARR=($ACTUAL)                                                                             # Convierte los plugins en un array
+    ACTUAL=$(xfconf-query -c xfce4-panel -p /panels/panel-1/plugin-ids -v | cut -f2 -d":")          # Recupera los plugins visibles
+    ACTUALARR=("$ACTUAL")                                                                           # Convierte los plugins en un array
     NUEVO="xfconf-query -c xfce4-panel -n -p /panels/panel-1/plugin-ids -a -t int -s 30"            # Comando base para agregar whiskermenu
     for i in "${ACTUALARR[@]}"                                                                      # Recorre el array agregando los elementos
     do                                                                                              # existentes en el comando nuevo
@@ -218,22 +218,22 @@ CONFIGURAR="GNOME Mate XFCE DoomEmacs Salir"
 echo -e "\nElija que configurar:"
 select conf in $CONFIGURAR;
 do
-    if [ $conf == "GNOME" ];
+    if [ "$conf" == "GNOME" ];
     then
         echo -e "\nConfigurando $conf"
         sleep 2
         gnome
-    elif [ $conf == "Mate" ];
+    elif [ "$conf" == "Mate" ];
     then
         echo -e "\nConfigurando $conf"
         sleep 2
         mate
-    elif [ $conf == "XFCE" ];
+    elif [ "$conf" == "XFCE" ];
     then
         echo -e "\nConfigurando $conf"
         sleep 2
         xfce
-    elif [ $conf == "DoomEmacs" ];
+    elif [ "$conf" == "DoomEmacs" ];
     then
         echo -e "\nConfigurando $conf"
         sleep 2
