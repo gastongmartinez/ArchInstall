@@ -23,11 +23,11 @@ echo -e "\nNombreEquipo.\n"
 read -rp "Ingrese el nombre del equipo: " EQUIPO
 read -rp "Ingrese el nombre del dominio: " DOMINIO
 
-echo -e "${EQUIPO}" > /etc/hostname
+echo -e "$EQUIPO" > /etc/hostname
 {
     echo -e "127.0.0.1\tlocalhost"
     echo -e "::1\t\tlocalhost"
-    echo -e "127.0.1.1\t${EQUIPO}.${DOMINIO}\t${EQUIPO}"
+    echo -e "127.0.1.1\t$EQUIPO.$DOMINIO\t$EQUIPO"
 } >> /etc/hosts
 
 # Network Manager

@@ -3,7 +3,7 @@
 ################################# LIGHTDM ##########################################
 lightdm () {
     read -rp "Desea instalar Lightdm (S/N): " LDM
-    if [ "${LDM}" == "S" ];
+    if [ "$LDM" == "S" ];
     then
         pacman -S lightdm --noconfirm
         pacman -S lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm
@@ -69,7 +69,7 @@ EOF
 
 temas_gtk () {
     read -rp "Desea instalar temas GTK (S/N): " TGTK
-    if [ "${TGTK}" == "S" ];
+    if [ "$TGTK" == "S" ];
     then
         TEMAS="Prof-Gnome Qogir WhiteSur Flat-Remix Orchis Nordic Salir"
         echo -e "\nSeleccione el tema a instalar:"
@@ -171,7 +171,7 @@ EOF
 ################################### KDE ############################################
 kde () {
     read -rp "Desea instalar SDDM (S/N): " DM
-    if [ "${DM}" == "S" ];
+    if [ "$DM" == "S" ];
     then
         sddm
     fi
@@ -219,6 +219,8 @@ wm_general () {
 ################################### AwesomeWM #######################################
 awesomewm () {
     pacman -S awesome --noconfirm
+    sleep 2
+    sed -i 's/Name=awesome/Name=Awesome/g' "/usr/share/xsessions/awesome.desktop"
 }
 ####################################################################################
 
@@ -298,7 +300,7 @@ menu () {
 
     ######################## WM ################################
     read -rp "Desea instalar algun window manager (S/N): " WM
-    if [ "${WM}" == "S" ];
+    if [ "$WM" == "S" ];
     then
         wm_general
 

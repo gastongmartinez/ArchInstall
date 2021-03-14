@@ -205,7 +205,6 @@ xfce () {
 }
 
 doom () {
-    cd ~
     if [ -d ~/.emacs.d ]; 
     then
         rm -Rf ~/.emacs.d

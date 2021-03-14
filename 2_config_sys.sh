@@ -29,14 +29,14 @@ echo -e "vm.swappiness=10\n" >> /etc/sysctl.d/99-sysctl.conf
 echo -e "\nSeleccion de paquetes para el hardware del equipo.\n"
 # Wifi
 read -rp "Desea instalar WPA Supplicant (S/N): " WIFI
-if [ "${WIFI}" == "S" ];
+if [ "$WIFI" == "S" ];
 then
     pacman -S wpa_supplicant --noconfirm
 fi
 
 # Bluetooth
 read -rp "Desea instalar Bluetooth (S/N): " BT
-if [ "${BT}" == "S" ];
+if [ "$BT" == "S" ];
 then
     pacman -S bluez --noconfirm
     pacman -S bluez-utils --noconfirm
@@ -45,7 +45,7 @@ fi
 
 # SSD
 read -rp "Se instala en un SSD (S/N): " SSD
-if [ "${SSD}" == "S" ];
+if [ "$SSD" == "S" ];
 then
     pacman -S util-linux --noconfirm
     systemctl enable fstrim.service
@@ -55,7 +55,7 @@ fi
 # Microcode
 
 read -rp "Instalar microcode I=Intel - A=AMD: " MC
-if [ "${MC}" == "A" ];
+if [ "$MC" == "A" ];
 then
     pacman -S amd-ucode --noconfirm
 else
@@ -67,10 +67,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # Hardware
 read -rp "Se instala en maquina virtual (S/N): " MV
-if [ "${MV}" == "S" ];
+if [ "$MV" == "S" ];
 then
     read -rp "Indicar plataforma virtual 1=VirtualBox - 2=VMWare: " PLAT
-    if [ "${PLAT}" -eq 1 ] 2>/dev/null;
+    if [ "$PLAT" -eq 1 ] 2>/dev/null;
     then
         # VirtualBox Guest utils
         pacman -S virtualbox-guest-utils --noconfirm
@@ -90,26 +90,26 @@ pacman -S pulseaudio-bluetooth --noconfirm
 
 # Video
 read -rp "Instalar drivers de Video AMD (S/N): " VAMD
-if [ "${VAMD}" == "S" ];
+if [ "$VAMD" == "S" ];
 then
     pacman -S xf86-video-amdgpu --noconfirm
 fi
 read -rp "Instalar drivers de Video Intel (S/N): " VINT
-if [ "${VINT}" == "S" ];
+if [ "$VINT" == "S" ];
 then
     pacman -S xf86-video-intel --noconfirm
 fi
 
 # Touchpad
 read -rp "Instalar drivers para touchpad (S/N): " TOUCH
-if [ "${TOUCH}" == "S" ];
+if [ "$TOUCH" == "S" ];
 then
     pacman -S xf86-input-libinput --noconfirm
 fi
 
 # PowerManagement
 read -rp "Instalar PowerMangement (S/N): " PM
-if [ "${PM}" == "S" ];
+if [ "$PM" == "S" ];
 then
     pacman -S tlp --noconfirm 
     pacman -S powertop --noconfirm
@@ -118,7 +118,7 @@ fi
 
 # ACPI 
 read -rp "Instalar ACPI (S/N): " AC
-if [ "${AC}" == "S" ];
+if [ "$AC" == "S" ];
 then   
     pacman -S acpi --noconfirm 
     pacman -S acpi_call --noconfirm     
