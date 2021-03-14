@@ -243,3 +243,13 @@ do
     echo -e "\nElija el escritorio a configurar:"
     REPLY=""
 done
+
+# ZSH
+touch ~/.zshrc
+{
+    echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme'
+    echo 'source /usr/share/autojump/autojump.zsh'
+    echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh'
+    echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' 
+} >>~/.zshrc
+chsh -s /usr/bin/zsh
