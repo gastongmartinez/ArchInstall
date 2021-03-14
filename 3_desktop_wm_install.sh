@@ -210,8 +210,15 @@ wm_general () {
     pacman -S dmenu --noconfirm --needed
     pacman -S rofi --noconfirm --needed
     pacman -S nitrogen --noconfirm --needed
+    pacman -S feh --noconfirm --needed
     pacman -S picom --noconfirm
     pacman -S lxappearance --noconfirm
+}
+####################################################################################
+
+################################### AwesomeWM #######################################
+awesomewm () {
+    pacman -S awesome --noconfirm
 }
 ####################################################################################
 
@@ -263,22 +270,22 @@ menu () {
     do
         if [ $escritorio == "GNOME" ];
         then
-            echo -e "\nInstalando GNOME"
+            echo -e "\nInstalando $escritorio"
             sleep 2
             gnome
         elif [ $escritorio == "XFCE" ];
         then
-            echo -e "\nInstalando XFCE"
+            echo -e "\nInstalando $escritorio"
             sleep 2
             xfce
         elif [ $escritorio == "Mate" ];
         then
-            echo -e "\nInstalando Mate"
+            echo -e "\nInstalando $escritorio"
             sleep 2
             mate
         elif [ $escritorio == "KDE" ];
         then
-            echo -e "\nInstalando KDE"
+            echo -e "\nInstalando $escritorio"
             sleep 2
             kde
         else
@@ -295,35 +302,40 @@ menu () {
     then
         wm_general
 
-        WINMS="SpectrWM Xmonad I3 BSPWM Qtile Salir"
+        WINMS="SpectrWM Xmonad I3 BSPWM Qtile Awesome Salir"
         echo -e "\nSeleccione el window manager a instalar:"
         select winm in $WINMS;
         do
             if [ $winm == "SpectrWM" ];
             then
-                echo -e "\nInstalando SpectrWM"
+                echo -e "\nInstalando $winm"
                 sleep 2
                 spectrwm
             elif [ $winm == "Xmonad" ];
             then
-                echo -e "\nInstalando Xmonad"
+                echo -e "\nInstalando $winm"
                 sleep 2
                 xmonad
             elif [ $winm == "I3" ];
             then
-                echo -e "\nInstalando I3"
+                echo -e "\nInstalando $winm"
                 sleep 2
                 i3
             elif [ $winm == "BSPWM" ];
             then
-                echo -e "\nInstalando BSPWM"
+                echo -e "\nInstalando $winm"
                 sleep 2
                 bspwm
             elif [ $winm == "Qtile" ];
             then
-                echo -e "\nInstalando Qtile"
+                echo -e "\nInstalando $winm"
                 sleep 2
                 qtile
+            elif [ $winm == "Awesome" ];
+            then
+                echo -e "\nInstalando $winm"
+                sleep 2
+                awesomewm
             else
                 break
             fi

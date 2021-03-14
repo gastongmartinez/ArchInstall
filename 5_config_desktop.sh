@@ -239,7 +239,6 @@ do
         sleep 2
         doom
     else
-        echo "Salir"
         break
     fi
     echo -e "\nElija el escritorio a configurar:"
