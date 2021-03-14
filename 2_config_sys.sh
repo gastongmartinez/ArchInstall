@@ -10,7 +10,7 @@ pacman -Syu --noconfirm
 # MirrorList
 echo -e "\nActualizando mirrorlist\n"
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.OLD
-reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Syu
 
 # Usuario
