@@ -40,6 +40,7 @@ PACMANPKGS=(
     'zsh-autosuggestions'
     'zsh-syntax-highlighting'
     'dialog'
+    'shellcheck'
 
     #### Terminales ####
     'alacritty'
@@ -49,11 +50,13 @@ PACMANPKGS=(
     'mc'
     'doublecmd-gtk2'
     'vifm'
+    'fzf'
     'meld'
     'stow'
     'ripgrep'
     'exfat-utils'
     'autofs'
+    'ntfs-3g'
 
     #### Sistema ####
     'ntp'
@@ -66,6 +69,7 @@ PACMANPKGS=(
     'pkgfile'
     'lshw'
     'plank'
+    'powerline'
     
     #### Editores ####
     'vim'
@@ -89,6 +93,9 @@ PACMANPKGS=(
     'wireshark-qt'
     'inetutils'
     'dnsutils'
+    'avahi'
+    'nfs-utils'
+    'nss-mdns'
 
     #### Diseño ####
     'gimp'
@@ -108,6 +115,7 @@ PACMANPKGS=(
     'python'
     'jdk-openjdk'
     'pycharm-community-edition'
+    'nodejs'
     #'netbeans'
     #'stack'
     #'cabal-install'
@@ -163,4 +171,8 @@ su - "$USUARIO" <<EOF
         paru -S "$AUR" --noconfirm --needed
     done
 EOF
+#######################################################################
+
+################### Activacion de sercicios ###########################
+systemctl enable avahi-daemon
 #######################################################################

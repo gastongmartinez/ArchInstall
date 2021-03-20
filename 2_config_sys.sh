@@ -121,7 +121,9 @@ read -rp "Instalar ACPI (S/N): " AC
 if [ "$AC" == "S" ];
 then   
     pacman -S acpi --noconfirm 
-    pacman -S acpi_call --noconfirm     
+    pacman -S acpi_call --noconfirm
+    pacman -S acpid --noconfirm
+    systemctl enable acpid     
 fi
 ####################################################################
 
