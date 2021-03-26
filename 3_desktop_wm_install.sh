@@ -134,8 +134,11 @@ gnome () {
         paru -S gnome-shell-extension-dash-to-dock --noconfirm
 EOF
 
-    # Deshabilitar Wayland (Necesario para ejecutar Plank)
-    sed -i 's/#WaylandEnable=false/WaylandEnable=false/g' "/etc/gdm/custom.conf"
+    read -rp "Desea desactivar Wayland (S/N): " WL
+    if [ "$WL" == "S" ];
+    then
+        sed -i 's/#WaylandEnable=false/WaylandEnable=false/g' "/etc/gdm/custom.conf"
+    fi
 }
 ####################################################################################
 
