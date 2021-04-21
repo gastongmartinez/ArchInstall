@@ -70,6 +70,7 @@ PACMANPKGS=(
     'lshw'
     'plank'
     'powerline'
+    'flameshot'
     
     #### Editores ####
     'vim'
@@ -116,6 +117,7 @@ PACMANPKGS=(
     'python-pip'
     'jdk-openjdk'
     'pycharm-community-edition'
+    'intellij-idea-community-edition'
     'nodejs'
     'npm'
     #'netbeans'
@@ -159,7 +161,7 @@ fi
 ################# Instalacion de paquetes desde AUR ###################
 su - "$USUARIO" <<EOF
     AURPKGS=(
-        'pamac'
+        'pamac-aur'
         'brave-bin'
         'zenmap'
         #'nerd-fonts-complete'
@@ -168,6 +170,7 @@ su - "$USUARIO" <<EOF
         'ttf-ms-fonts'
         'ttf-iosevka'
         'ttf-firacode'
+        'font-manager'
     )
     for AUR in "${AURPKGS[@]}"; do
         paru -S "$AUR" --noconfirm --needed
