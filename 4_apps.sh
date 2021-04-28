@@ -71,6 +71,7 @@ PACMANPKGS=(
     'plank'
     'powerline'
     'flameshot'
+    'ktouch'
     
     #### Editores ####
     'vim'
@@ -106,6 +107,7 @@ PACMANPKGS=(
     'freecad'
 
     #### DEV ####
+    'the_silver_searcher'
     'git'
     'gcc'
     'clang'
